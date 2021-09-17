@@ -3,38 +3,50 @@ const MANIFEST = 'flutter-app-manifest';
 const TEMP = 'flutter-temp-cache';
 const CACHE_NAME = 'flutter-app-cache';
 const RESOURCES = {
-  "icons/Icon-512.png": "529f9281c7bd448463c995b47c9befe4",
-"icons/Icon-192.png": "fcfd9515e216757d0c405b04a0741a21",
-"favicon.png": "9e118249f3d09c38b28095dbb5c14a7e",
-"manifest.json": "eb6abaa5ba0c5f8ab8ee1378d297fcb7",
-"index.html": "be732d3870bbb38f4879c2c002c886ff",
-"/": "be732d3870bbb38f4879c2c002c886ff",
-"assets/NOTICES": "601e38c7bfce15ae63017ed692340dbd",
-"assets/fonts/MaterialIcons-Regular.otf": "1288c9e28052e028aba623321f7826ac",
-"assets/AssetManifest.json": "fd6d51dcfb1b570ebe2f243b25377ea5",
-"assets/resources/images/num_systems.png": "b82321121be9324d77b9a9a39b4c5228",
-"assets/resources/images/logo.png": "59b984028582182089ccdfbbc46f10c7",
-"assets/resources/images/shoe_size.png": "d189f8dac179d2fc68ab257f5192d537",
-"assets/resources/images/fuel.png": "d557b7b8da7a9887bb5dfa73c83c9e61",
-"assets/resources/images/length.png": "2d57f006df44e79fa5a3b243a63bfcf1",
-"assets/resources/images/currencies.png": "99a5c05753997b4ce9ce8097686c38ca",
+  "favicon.png": "9e118249f3d09c38b28095dbb5c14a7e",
+"index.html": "fe42ba8fa2e8d8d39e1d9ef869fdaf2b",
+"/": "fe42ba8fa2e8d8d39e1d9ef869fdaf2b",
+"assets/NOTICES": "6740d7a19c6019522946ea66fad9e3e5",
+"assets/FontManifest.json": "7b2a36307916a9721811788013e65289",
+"assets/fonts/MaterialIcons-Regular.otf": "4e6447691c9509f7acdbf8a931a85ca1",
+"assets/AssetManifest.json": "e9cde15f61420b945d87f6b9ccf5acc7",
 "assets/resources/images/area.png": "fa724188ecbd91ecdbde6c0478ce26e3",
+"assets/resources/images/energy.png": "103ed054f04d796a0c91d169e07fca80",
+"assets/resources/images/github_light.png": "eb94bb97c3410733ce017b184d314723",
+"assets/resources/images/penguin.png": "2c78cf6d8f012f18f69eb56789f079e1",
+"assets/resources/images/force.png": "63a1463fe0d29ca96122e74bf1e45605",
+"assets/resources/images/num_systems.png": "b82321121be9324d77b9a9a39b4c5228",
+"assets/resources/images/angles.png": "f8a0c60156c1d7a67f6781422b785f8c",
+"assets/resources/images/time.png": "62219900f6e903a5ca20710b1a9b6aa1",
+"assets/resources/images/mass.png": "563a37b10d72222dee86a42b251d9441",
 "assets/resources/images/volume.png": "4241670b1d26ac8ca9dfd6a24e7b4b86",
 "assets/resources/images/pressure.png": "a98980f0401565315a9e9bfb48627ffa",
-"assets/resources/images/power.png": "92138ef7faa7e8f6fd136c265d7c4932",
-"assets/resources/images/data.png": "cb5d3bfa5d85090037d249f234596f87",
-"assets/resources/images/speed.png": "a5dbe972024e38c2a26dd9854eb22438",
-"assets/resources/images/time.png": "62219900f6e903a5ca20710b1a9b6aa1",
+"assets/resources/images/github_dark.png": "438c17272c5f0e9f4a6da34d3e4bc5bd",
+"assets/resources/images/currencies.png": "99a5c05753997b4ce9ce8097686c38ca",
+"assets/resources/images/fuel.png": "d557b7b8da7a9887bb5dfa73c83c9e61",
 "assets/resources/images/torque.png": "48c7d3cb1c1c2866b166de7d8e995075",
-"assets/resources/images/energy.png": "103ed054f04d796a0c91d169e07fca80",
-"assets/resources/images/prefixes.png": "69a1b0eed46990d3ff841d2c328cf94a",
-"assets/resources/images/mass.png": "563a37b10d72222dee86a42b251d9441",
+"assets/resources/images/shoe_size.png": "d189f8dac179d2fc68ab257f5192d537",
+"assets/resources/images/length.png": "2d57f006df44e79fa5a3b243a63bfcf1",
+"assets/resources/images/power.png": "92138ef7faa7e8f6fd136c265d7c4932",
+"assets/resources/images/logo.png": "bdb5552ad2d4fc908d3260091b4931e3",
+"assets/resources/images/speed.png": "a5dbe972024e38c2a26dd9854eb22438",
+"assets/resources/images/data.png": "cb5d3bfa5d85090037d249f234596f87",
 "assets/resources/images/temperature.png": "1ec875c848337b5a1e5196e78ff9cd7f",
-"assets/resources/images/force.png": "63a1463fe0d29ca96122e74bf1e45605",
-"assets/resources/images/angles.png": "f8a0c60156c1d7a67f6781422b785f8c",
-"assets/FontManifest.json": "7b2a36307916a9721811788013e65289",
-"main.dart.js": "cc0e452c32543fa35ca06c0c255563fe",
-"version.json": "8bc88401e01e4c2f0577cbcd865f2630"
+"assets/resources/images/prefixes.png": "69a1b0eed46990d3ff841d2c328cf94a",
+"splash/img/light-3x.png": "fe995eb533eb9838400af2674f8f848e",
+"splash/img/light-4x.png": "4cac50ff6596f0208620b1f5013a0edc",
+"splash/img/light-2x.png": "d0b3fcf69e199244841d9527f3546e03",
+"splash/img/dark-3x.png": "fe995eb533eb9838400af2674f8f848e",
+"splash/img/dark-2x.png": "d0b3fcf69e199244841d9527f3546e03",
+"splash/img/light-1x.png": "03a4f22dd9c9ba541c425ad90a8ffb83",
+"splash/img/dark-1x.png": "03a4f22dd9c9ba541c425ad90a8ffb83",
+"splash/img/dark-4x.png": "4cac50ff6596f0208620b1f5013a0edc",
+"splash/style.css": "6632d31a286858494e37f66a6c231f72",
+"version.json": "b78ca869faa567d347d55c3d6b6a892a",
+"manifest.json": "eb6abaa5ba0c5f8ab8ee1378d297fcb7",
+"icons/Icon-512.png": "529f9281c7bd448463c995b47c9befe4",
+"icons/Icon-192.png": "fcfd9515e216757d0c405b04a0741a21",
+"main.dart.js": "0b7c70ab77c172540f7229841a2e115e"
 };
 
 // The application shell files that are downloaded before a service worker can
@@ -51,7 +63,7 @@ self.addEventListener("install", (event) => {
   return event.waitUntil(
     caches.open(TEMP).then((cache) => {
       return cache.addAll(
-        CORE.map((value) => new Request(value + '?revision=' + RESOURCES[value], {'cache': 'reload'})));
+        CORE.map((value) => new Request(value, {'cache': 'reload'})));
     })
   );
 });
