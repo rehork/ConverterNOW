@@ -126,6 +126,7 @@ class CustomDrawer extends StatelessWidget {
     for (int i = 0; i < propertyUiList.length; i++) {
       PropertyUi propertyUi = propertyUiList[i];
       conversionDrawer[conversionsOrderDrawer[i]] = DrawerTile(
+        key: ValueKey('drawerItem_' + reversePageNumberListMap[i]),
         leading: Image.asset(
           propertyUi.imagePath,
           width: 30,

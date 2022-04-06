@@ -79,6 +79,7 @@ class AppScaffold extends StatelessWidget {
           floatingActionButton:
               (selectedSection == AppPage.conversions && MediaQuery.of(context).viewInsets.bottom == 0)
                   ? FloatingActionButton(
+                      key: const ValueKey('clearAll'),
                       child: const Icon(
                         Icons.clear_outlined,
                         color: Colors.white,
@@ -123,6 +124,7 @@ class AppScaffold extends StatelessWidget {
                     children: <Widget>[
                       Builder(builder: (context) {
                         return IconButton(
+                            key: const ValueKey('menuDrawer'),
                             tooltip: AppLocalizations.of(context)!.menu,
                             icon: const Icon(Icons.menu),
                             onPressed: () {
@@ -130,6 +132,7 @@ class AppScaffold extends StatelessWidget {
                             });
                       }),
                       IconButton(
+                        key: const ValueKey('clearAll'),
                         tooltip: AppLocalizations.of(context)!.clearAll,
                         icon: const Icon(Icons.clear),
                         onPressed: () => clearAll(_isDrawerFixed),

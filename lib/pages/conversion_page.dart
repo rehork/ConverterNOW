@@ -45,7 +45,7 @@ class ConversionPage extends StatelessWidget {
       gridTiles.add(UnitCard(
         symbol: unitData.unit.symbol,
         textField: TextFormField(
-          key: Key(unitData.unit.name.toString()),
+          key: ValueKey(unitData.unit.name.toString()),
           style: TextStyle(
             fontSize: 16.0,
             color: brightness == Brightness.dark ? Colors.white : Colors.black,

@@ -42,6 +42,8 @@ dev_dependencies:
   msix: ^3.4.1
   flutter_test:
     sdk: flutter
+  integration_test:
+    sdk: flutter
 
 flutter_native_splash:
   # Customize the parameters below, and run the following command in the terminal:
