@@ -103,6 +103,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 },
               ),
               DropdownListTile(
+                key: const ValueKey('language'),
                 title: AppLocalizations.of(context)!.language,
                 textStyle: textStyle,
                 items: [

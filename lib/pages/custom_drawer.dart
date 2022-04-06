@@ -101,6 +101,7 @@ class CustomDrawer extends StatelessWidget {
     }
     headerDrawer
       ..add(DrawerTile(
+        key: const ValueKey('drawerItem_settings'),
         leading: const Icon(Icons.settings_outlined),
         title: Text(AppLocalizations.of(context)!.settings),
         onTap: () {

@@ -6,7 +6,7 @@ import 'package:converterpro/main.dart' as app;
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
-  group('Smartphone test', () {
+  group('Small display test', () {
     testWidgets('Perform conversion', (WidgetTester tester) async {
       app.main();
       await tester.pumpAndSettle();
@@ -22,7 +22,7 @@ void main() {
 
       expect(tffCentimeters.controller!.text, '2.54', reason: 'Conversion error');
       expect(tffMeters.controller!.text, '0.0254', reason: 'Conversion error');
-      
+
       await tester.tap(find.byKey(const ValueKey('clearAll')));
       await tester.pumpAndSettle();
       expect(tffInches.controller!.text, '', reason: 'Text not cleared');
@@ -45,7 +45,8 @@ void main() {
       expect(find.text('Area'), findsOneWidget, reason: 'Expected the area page');
 
       var tffInches = find.byKey(const ValueKey('AREA.squareInches')).evaluate().single.widget as TextFormField;
-      var tffCentimeters = find.byKey(const ValueKey('AREA.squareCentimeters')).evaluate().single.widget as TextFormField;
+      var tffCentimeters =
+          find.byKey(const ValueKey('AREA.squareCentimeters')).evaluate().single.widget as TextFormField;
       var tffMeters = find.byKey(const ValueKey('AREA.squareMeters')).evaluate().single.widget as TextFormField;
 
       await tester.enterText(find.byKey(const ValueKey('AREA.squareInches')), '1');
@@ -53,14 +54,40 @@ void main() {
 
       expect(tffCentimeters.controller!.text, '6.4516', reason: 'Conversion error');
       expect(tffMeters.controller!.text, '0.00064516', reason: 'Conversion error');
-      
+
       await tester.tap(find.byKey(const ValueKey('clearAll')));
       await tester.pumpAndSettle();
       expect(tffInches.controller!.text, '', reason: 'Text not cleared');
       expect(tffCentimeters.controller!.text, '', reason: 'Text not cleared');
       expect(tffMeters.controller!.text, '', reason: 'Text not cleared');
-      
+
       //await Future.delayed(const Duration(seconds: 2), (){});
     });
+  });
+
+  testWidgets('Change language', (WidgetTester tester) async {
+    app.main();
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.byKey(const ValueKey('menuDrawer')));
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.byKey(const ValueKey('drawerItem_settings')));
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.byKey(const ValueKey('language')));
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text('Italiano'));
+    await tester.pumpAndSettle();
+
+    //swipe from the left to open drawer
+    await tester.dragFrom(tester.getTopLeft(find.byType(MaterialApp)), const Offset(300, 0));
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text('Lunghezza'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Lunghezza'), findsOneWidget, reason: 'Expected translated string');
   });
 }
