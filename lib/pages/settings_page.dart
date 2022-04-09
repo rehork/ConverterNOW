@@ -133,6 +133,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 },
               ),
               ListTile(
+                key: const ValueKey('reorder-properties'),
                 title: Text(
                   AppLocalizations.of(context)!.reorderProperties,
                   style: textStyle,
