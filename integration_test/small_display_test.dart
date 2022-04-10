@@ -88,6 +88,25 @@ void main() {
       expect(find.text('Lunghezza'), findsOneWidget, reason: 'Expected translated string');
     });
 
+    testWidgets('Check if language has been saved and go back to english', (WidgetTester tester) async {
+      app.main();
+
+      await tester.pumpAndSettle();
+      expect(find.text('Lunghezza'), findsOneWidget, reason: 'Expected translated string');
+
+      await tester.tap(find.byKey(const ValueKey('menuDrawer')));
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.byKey(const ValueKey('drawerItem_settings')));
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.byKey(const ValueKey('language')));
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.text('English'));
+      await tester.pumpAndSettle();
+    });
+
     testWidgets('Reorder properties', (WidgetTester tester) async {
       app.main();
       await tester.pumpAndSettle();
