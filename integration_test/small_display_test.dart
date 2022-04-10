@@ -165,7 +165,18 @@ void main() {
         tester.getCenter(find.text('Meters')).dy > tester.getCenter(find.text('Centimeters')).dy &&
             tester.getCenter(find.text('Centimeters')).dy > tester.getCenter(find.text('Inches')).dy,
         true,
-        reason: 'Final ordering of properties is not what expected',
+        reason: 'Final ordering of length units is not what expected',
+      );
+    });
+
+    testWidgets('Check if units ordering has been saved', (WidgetTester tester) async {
+      app.main();
+      await tester.pumpAndSettle();
+      expect(
+        tester.getCenter(find.text('Meters')).dy > tester.getCenter(find.text('Centimeters')).dy &&
+            tester.getCenter(find.text('Centimeters')).dy > tester.getCenter(find.text('Inches')).dy,
+        true,
+        reason: 'Final ordering of length units is not what expected',
       );
     });
 
@@ -219,10 +230,28 @@ void main() {
             tester.getCenter(find.byKey(const ValueKey('drawerItem_area'))).dy >
                 tester.getCenter(find.byKey(const ValueKey('drawerItem_volume'))).dy,
         true,
-        reason: 'Final ordering of properties is not what expected',
+        reason: 'Final ordering the of properties is not what expected',
       );
       //await Future.delayed(const Duration(seconds: 4), () {});
     });
+
+    testWidgets('Check if properties ordering has been saved', (WidgetTester tester) async {
+      app.main();
+      await tester.pumpAndSettle();
+
+      await swipeOpenDrawer(tester);
+      await tester.pumpAndSettle();
+
+      expect(
+        tester.getCenter(find.byKey(const ValueKey('drawerItem_length'))).dy >
+                tester.getCenter(find.byKey(const ValueKey('drawerItem_area'))).dy &&
+            tester.getCenter(find.byKey(const ValueKey('drawerItem_area'))).dy >
+                tester.getCenter(find.byKey(const ValueKey('drawerItem_volume'))).dy,
+        true,
+        reason: 'Ordering of the properties is not what expected',
+      );
+    });
+
   });
 }
 
