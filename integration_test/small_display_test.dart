@@ -107,6 +107,62 @@ void main() {
       await tester.pumpAndSettle();
     });
 
+    testWidgets('Reorder units', (WidgetTester tester) async {
+      app.main();
+      await tester.pumpAndSettle();
+
+      // At the beginning the ordering is Meters, Centimeters, Inches, ...
+      expect(
+        tester.getCenter(find.text('Meters')).dy < tester.getCenter(find.text('Centimeters')).dy &&
+            tester.getCenter(find.text('Centimeters')).dy < tester.getCenter(find.text('Inches')).dy,
+        true,
+        reason: 'Initial ordering of length units is not what expected',
+      );
+
+      await tester.tap(find.byKey(const ValueKey('menuDrawer')));
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.byKey(const ValueKey('drawerItem_settings')));
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.byKey(const ValueKey('reorder-units')));
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.text('Length'));
+      await tester.pumpAndSettle();
+
+      await longPressDrag(
+        tester,
+        tester.getCenter(find.text('Meters')),
+        tester.getCenter(find.text('Feet')),
+      );
+      await tester.pumpAndSettle();
+
+      await longPressDrag(
+        tester,
+        tester.getCenter(find.text('Inches')),
+        tester.getCenter(find.text('Centimeters')),
+      );
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.byKey(const ValueKey('confirm')));
+      await tester.pumpAndSettle();
+
+      await swipeOpenDrawer(tester);
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.text('Length'));
+      await tester.pumpAndSettle();
+
+      // Now the ordering should be Inches, Centimeters, Meters, ...
+      expect(
+        tester.getCenter(find.text('Meters')).dy > tester.getCenter(find.text('Centimeters')).dy &&
+            tester.getCenter(find.text('Centimeters')).dy > tester.getCenter(find.text('Inches')).dy,
+        true,
+        reason: 'Final ordering of properties is not what expected',
+      );
+    });
+
     testWidgets('Reorder properties', (WidgetTester tester) async {
       app.main();
       await tester.pumpAndSettle();
@@ -159,8 +215,7 @@ void main() {
         true,
         reason: 'Final ordering of properties is not what expected',
       );
-
-      await Future.delayed(const Duration(seconds: 4), () {});
+      //await Future.delayed(const Duration(seconds: 4), () {});
     });
   });
 }

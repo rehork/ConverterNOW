@@ -142,6 +142,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 shape: const RoundedRectangleBorder(borderRadius: borderRadius),
               ),
               ListTile(
+                key: const ValueKey('reorder-units'),
                 title: Text(
                   AppLocalizations.of(context)!.reorderUnits,
                   style: textStyle,
