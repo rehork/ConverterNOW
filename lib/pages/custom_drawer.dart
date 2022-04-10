@@ -71,9 +71,13 @@ class CustomDrawer extends StatelessWidget {
 
     headerDrawer.add(
       DrawerTile(
+        key: const ValueKey('drawerItem_search'),
         leading: const Icon(Icons.search_outlined),
         title: Text(AppLocalizations.of(context)!.search),
         onTap: () async {
+          if (!isDrawerFixed) {
+            Navigator.of(context).pop();
+          }
           final orderList = context.read<AppModel>().conversionsOrderDrawer;
           final int? newPage = await showSearch(
             context: context,

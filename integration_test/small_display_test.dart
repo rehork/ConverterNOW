@@ -8,27 +8,33 @@ void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
   group('Small display test', () {
-    testWidgets('Perform conversion', (WidgetTester tester) async {
+    testWidgets('Perform conversion, clear and undo', (WidgetTester tester) async {
       app.main();
       await tester.pumpAndSettle();
 
+      var tffFeet = find.byKey(const ValueKey('LENGTH.feet')).evaluate().single.widget as TextFormField;
       var tffInches = find.byKey(const ValueKey('LENGTH.inches')).evaluate().single.widget as TextFormField;
-      var tffCentimeters = find.byKey(const ValueKey('LENGTH.centimeters')).evaluate().single.widget as TextFormField;
       var tffMeters = find.byKey(const ValueKey('LENGTH.meters')).evaluate().single.widget as TextFormField;
 
       expect(find.text('Length'), findsOneWidget, reason: 'Expected the length page');
 
-      await tester.enterText(find.byKey(const ValueKey('LENGTH.inches')), '1');
+      await tester.enterText(find.byKey(const ValueKey('LENGTH.feet')), '1');
       await tester.pumpAndSettle();
 
-      expect(tffCentimeters.controller!.text, '2.54', reason: 'Conversion error');
-      expect(tffMeters.controller!.text, '0.0254', reason: 'Conversion error');
+      expect(tffInches.controller!.text, '12', reason: 'Conversion error');
+      expect(tffMeters.controller!.text, '0.3048', reason: 'Conversion error');
 
       await tester.tap(find.byKey(const ValueKey('clearAll')));
       await tester.pumpAndSettle();
+      expect(tffFeet.controller!.text, '', reason: 'Text not cleared');
       expect(tffInches.controller!.text, '', reason: 'Text not cleared');
-      expect(tffCentimeters.controller!.text, '', reason: 'Text not cleared');
       expect(tffMeters.controller!.text, '', reason: 'Text not cleared');
+
+      await tester.tap(find.byKey(const ValueKey('undoClearAll')));
+      await tester.pumpAndSettle();
+      expect(tffFeet.controller!.text, '1.0', reason: 'Text not restored');
+      expect(tffInches.controller!.text, '12.0', reason: 'Text not restored');
+      expect(tffMeters.controller!.text, '0.3048', reason: 'Text not restored');
     });
 
     testWidgets('Change to a new property and perform conversion', (WidgetTester tester) async {

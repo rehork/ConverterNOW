@@ -45,6 +45,7 @@ class AppScaffold extends StatelessWidget {
           behavior: SnackBarBehavior.floating,
           width: isDrawerFixed ? 400 : null,
           action: SnackBarAction(
+            key: const ValueKey('undoClearAll'),
             label: AppLocalizations.of(context)!.undo,
             onPressed: () {
               context.read<Conversions>().undoClearOperation();
