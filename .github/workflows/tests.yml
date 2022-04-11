@@ -3,8 +3,8 @@ name: Tests
 on: [push, pull_request]
 
 jobs:
-  test:
-    name: Test
+  unit_testing:
+    name: Unit testing
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
@@ -26,9 +26,29 @@ jobs:
     - name: Run unit testing
       run: flutter test test/calculator_test.dart
 
-    - name: Setup the Android Emulator
+  integration_testing:
+    name: Integration testing
+    runs-on: macos-latest
+    timeout-minutes: 15
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Setup Flutter
+      uses: subosito/flutter-action@v2.3.0
+      with:
+        channel: stable
+        cache: true
+
+    - name: Flutter version
+      run: flutter --version
+
+    - name: Download pub dependencies
+      run: flutter pub get
+
+    - name: Setup the Android Emulator and run tests
       uses: reactivecircus/android-emulator-runner@v2.23.0
       with:
-        api-level: 31
+        api-level: 30
         emulator-build: 7425822
         script: flutter test -d emu integration_test
