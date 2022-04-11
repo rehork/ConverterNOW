@@ -30,4 +30,4 @@ jobs:
       uses: reactivecircus/android-emulator-runner@v2.23.0
       with:
         api-level: 31
-        script: flutter test -d emu integration_test
+        script: pwd && ls
