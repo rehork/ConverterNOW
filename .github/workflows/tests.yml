@@ -27,7 +27,7 @@ jobs:
       run: flutter test test/calculator_test.dart
 
     - name: Setup the Android Emulator
-      uses: reactivecircus/android-emulator-runner@v2
+      uses: reactivecircus/android-emulator-runner@v2.23.0
       with:
         api-level: 31
         script: flutter test -d emu integration_test
