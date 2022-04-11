@@ -34,6 +34,11 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
+    - name: Setup Java
+      uses: actions/setup-java@v1
+      with:
+        java-version: '12.x'
+
     - name: Setup Flutter
       uses: subosito/flutter-action@v2.3.0
       with:
@@ -50,5 +55,5 @@ jobs:
       uses: reactivecircus/android-emulator-runner@v2
       with:
         api-level: 29
-        emulator-build: 7425822
         script: flutter test -d emu integration_test
+#        emulator-build: 7425822
