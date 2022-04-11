@@ -47,8 +47,8 @@ jobs:
       run: flutter pub get
 
     - name: Setup the Android Emulator and run tests
-      uses: reactivecircus/android-emulator-runner@v2.23.0
+      uses: reactivecircus/android-emulator-runner@v2
       with:
-        api-level: 30
+        api-level: 29
         emulator-build: 7425822
         script: flutter test -d emu integration_test
