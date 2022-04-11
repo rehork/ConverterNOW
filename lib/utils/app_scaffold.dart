@@ -145,6 +145,7 @@ class AppScaffold extends StatelessWidget {
           floatingActionButton:
               (selectedSection == AppPage.conversions && MediaQuery.of(context).viewInsets.bottom == 0)
                   ? FloatingActionButton(
+                      key: const ValueKey('calculator'),
                       tooltip: AppLocalizations.of(context)!.calculator,
                       child: const Icon(
                         Icons.calculate_outlined,

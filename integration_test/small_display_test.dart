@@ -252,6 +252,44 @@ void main() {
       );
     });
 
+    testWidgets('Simple calculator operations', (WidgetTester tester) async {
+      app.main();
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.byKey(const ValueKey('calculator')));
+      await tester.pumpAndSettle();
+
+      String? getResultText() => (find.byKey(const ValueKey('result')).evaluate().single.widget as SelectableText).data;
+
+      await tester.tap(find.text('3'));
+      await tester.pumpAndSettle();
+      
+      expect(getResultText(), '3');
+
+      await tester.tap(find.text('×'));
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.text('6'));
+      await tester.pumpAndSettle();
+      expect(getResultText(), '6');
+
+      await tester.tap(find.text('+'));
+      await tester.pumpAndSettle();
+      expect(getResultText(), '18');
+
+      await tester.tap(find.text('1'));
+      await tester.pumpAndSettle();
+      expect(getResultText(), '1');
+      await tester.tap(find.text('0'));
+      await tester.pumpAndSettle();
+      expect(getResultText(), '10');
+
+      await tester.tap(find.text('='));
+      await tester.pumpAndSettle();
+      expect(getResultText(), '28');
+
+    });
+
   });
 }
 

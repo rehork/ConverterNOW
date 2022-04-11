@@ -96,6 +96,7 @@ class CustomDrawer extends StatelessWidget {
     if (isDrawerFixed) {
       headerDrawer.add(
         DrawerTile(
+          key: const ValueKey('calculator'),
           leading: const Icon(Icons.calculate_outlined),
           title: Text(AppLocalizations.of(context)!.calculator),
           onTap: openCalculator,

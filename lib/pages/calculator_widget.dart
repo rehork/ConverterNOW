@@ -79,6 +79,7 @@ class _CalculatorWidget extends State<CalculatorWidget> {
                         padding: const EdgeInsets.symmetric(horizontal: 10),
                         child: SelectableText(
                           text,
+                          key: const ValueKey('result'),
                           style: TextStyle(
                             fontSize: 45.0,
                             fontWeight: FontWeight.bold,
