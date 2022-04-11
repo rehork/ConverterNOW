@@ -23,5 +23,11 @@ jobs:
     - name: Download pub dependencies
       run: flutter pub get
 
-    - name: Run tests
+    - name: Run unit testing
       run: flutter test test/calculator_test.dart
+
+    - name: Setup the Android Emulator
+      uses: reactivecircus/android-emulator-runner@v2
+      with:
+        api-level: 31
+        script: flutter test -d emu integration_test
