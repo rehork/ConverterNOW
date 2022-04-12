@@ -37,8 +37,8 @@ jobs:
 
     - name: Setup Java
       uses: actions/setup-java@v1
-        with:
-          java-version: '8.x'
+      with:
+        java-version: '8.x'
 
     - name: Setup Flutter
       uses: subosito/flutter-action@v2.3.0
