@@ -48,7 +48,7 @@ jobs:
     - name: Run integration testing
       run: |
         flutter pub get
-        flutter test integration_test/large_display_test.dart
+        flutter test integration_test/large_display_test.dart -d linux
 
   mobile_integration_testing:
     name: Mobile integration testing
