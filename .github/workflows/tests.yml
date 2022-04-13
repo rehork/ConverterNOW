@@ -62,6 +62,11 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
+    - name: Install missing packages
+      run: |
+        sudo apt update -y
+        sudo apt install -y clang cmake ninja-build pkg-config libgtk-3-dev
+
     - name: Setup Java
       uses: actions/setup-java@v3
       with:
