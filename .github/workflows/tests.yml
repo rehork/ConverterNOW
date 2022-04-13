@@ -45,6 +45,9 @@ jobs:
       with:
         cache: true
 
+    - name: Enable linux build
+      run: flutter config --enable-linux-desktop
+
     - name: Run integration testing
       run: |
         flutter pub get
