@@ -1,3 +1,4 @@
+import 'package:window_size/window_size.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
@@ -7,16 +8,19 @@ import 'package:converterpro/main.dart' as app;
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
-  group('Small display test', () {
+  group('Large display test', () {
     testWidgets('Perform conversion, clear and undo', (WidgetTester tester) async {
       app.main();
+      await tester.pumpAndSettle();
+      setWindowMinSize(const Size(800, 700));
+      setWindowMaxSize(const Size(800, 700));
       await tester.pumpAndSettle();
 
       var tffFeet = find.byKey(const ValueKey('LENGTH.feet')).evaluate().single.widget as TextFormField;
       var tffInches = find.byKey(const ValueKey('LENGTH.inches')).evaluate().single.widget as TextFormField;
       var tffMeters = find.byKey(const ValueKey('LENGTH.meters')).evaluate().single.widget as TextFormField;
 
-      expect(find.text('Length'), findsOneWidget, reason: 'Expected the length page');
+      expect(find.text('Length'), findsNWidgets(2), reason: 'Expected the length page');
 
       await tester.enterText(find.byKey(const ValueKey('LENGTH.feet')), '1');
       await tester.pumpAndSettle();
@@ -40,16 +44,12 @@ void main() {
     testWidgets('Change to a new property and perform conversion', (WidgetTester tester) async {
       app.main();
       await tester.pumpAndSettle();
-      await tester.tap(find.byKey(const ValueKey('menuDrawer')));
-      await tester.pumpAndSettle();
       await tester.tap(find.byKey(const ValueKey('drawerItem_currencies')));
       await tester.pumpAndSettle();
-      expect(find.text('Currencies'), findsOneWidget, reason: 'Expected the currencies page');
-      await tester.tap(find.byKey(const ValueKey('menuDrawer')));
-      await tester.pumpAndSettle();
+      expect(find.text('Currencies'), findsNWidgets(2), reason: 'Expected the currencies page');
       await tester.tap(find.byKey(const ValueKey('drawerItem_area')));
       await tester.pumpAndSettle();
-      expect(find.text('Area'), findsOneWidget, reason: 'Expected the area page');
+      expect(find.text('Area'), findsNWidgets(2), reason: 'Expected the area page');
 
       var tffInches = find.byKey(const ValueKey('AREA.squareInches')).evaluate().single.widget as TextFormField;
       var tffCentimeters =
@@ -69,7 +69,7 @@ void main() {
       expect(tffMeters.controller!.text, '', reason: 'Text not cleared');
     });
 
-    testWidgets('Change language', (WidgetTester tester) async {
+    /*testWidgets('Change language', (WidgetTester tester) async {
       app.main();
       await tester.pumpAndSettle();
 
@@ -111,7 +111,7 @@ void main() {
 
       await tester.tap(find.text('English'));
       await tester.pumpAndSettle();
-    });
+    });*/
 
     testWidgets('Reorder units', (WidgetTester tester) async {
       app.main();
@@ -125,36 +125,32 @@ void main() {
         reason: 'Initial ordering of length units is not what expected',
       );
 
-      await tester.tap(find.byKey(const ValueKey('menuDrawer')));
-      await tester.pumpAndSettle();
-
       await tester.tap(find.byKey(const ValueKey('drawerItem_settings')));
       await tester.pumpAndSettle();
 
       await tester.tap(find.byKey(const ValueKey('reorder-units')));
       await tester.pumpAndSettle();
 
-      await tester.tap(find.text('Length'));
+      await tester.tap(find.byKey(const ValueKey('chooseProperty-length')));
       await tester.pumpAndSettle();
+
+      final xDragHadle = tester.getCenter(find.byIcon(Icons.drag_handle).first).dx;
 
       await longPressDrag(
         tester,
-        tester.getCenter(find.text('Meters')),
-        tester.getCenter(find.text('Feet')),
+        Offset(xDragHadle, tester.getCenter(find.text('Meters')).dy),
+        Offset(xDragHadle, tester.getCenter(find.text('Feet')).dy),
       );
       await tester.pumpAndSettle();
 
       await longPressDrag(
         tester,
-        tester.getCenter(find.text('Inches')),
-        tester.getCenter(find.text('Centimeters')),
+        Offset(xDragHadle, tester.getCenter(find.text('Inches')).dy),
+        Offset(xDragHadle, tester.getCenter(find.text('Centimeters')).dy),
       );
       await tester.pumpAndSettle();
 
       await tester.tap(find.byKey(const ValueKey('confirm')));
-      await tester.pumpAndSettle();
-
-      await swipeOpenDrawer(tester);
       await tester.pumpAndSettle();
 
       await tester.tap(find.text('Length'));
@@ -184,9 +180,6 @@ void main() {
       app.main();
       await tester.pumpAndSettle();
 
-      await tester.tap(find.byKey(const ValueKey('menuDrawer')));
-      await tester.pumpAndSettle();
-
       // At the beginning the ordering is Length, Area, Volume, ...
       expect(
         tester.getCenter(find.byKey(const ValueKey('drawerItem_length'))).dy <
@@ -203,24 +196,23 @@ void main() {
       await tester.tap(find.byKey(const ValueKey('reorder-properties')));
       await tester.pumpAndSettle();
 
+      final xDragHadle = tester.getCenter(find.byIcon(Icons.drag_handle).first).dx;
+
       await longPressDrag(
         tester,
-        tester.getCenter(find.text('Length')),
-        tester.getCenter(find.text('Currencies')),
+        Offset(xDragHadle, tester.getCenter(find.text('Length').last).dy),
+        Offset(xDragHadle, tester.getCenter(find.text('Currencies').last).dy),
       );
       await tester.pumpAndSettle();
 
       await longPressDrag(
         tester,
-        tester.getCenter(find.text('Volume')),
-        tester.getCenter(find.text('Area')),
+        Offset(xDragHadle, tester.getCenter(find.text('Volume').last).dy),
+        Offset(xDragHadle, tester.getCenter(find.text('Area').last).dy),
       );
       await tester.pumpAndSettle();
 
       await tester.tap(find.byKey(const ValueKey('confirm')));
-      await tester.pumpAndSettle();
-
-      await swipeOpenDrawer(tester);
       await tester.pumpAndSettle();
 
       // Now the ordering should be Volume, Area, Length, ...
@@ -237,9 +229,6 @@ void main() {
 
     testWidgets('Check if properties ordering has been saved', (WidgetTester tester) async {
       app.main();
-      await tester.pumpAndSettle();
-
-      await swipeOpenDrawer(tester);
       await tester.pumpAndSettle();
 
       expect(
@@ -301,9 +290,3 @@ Future<void> longPressDrag(WidgetTester tester, Offset start, Offset end) async 
   await tester.pump(kPressTimeout);
   await drag.up();
 }
-
-/// Perform a swipe from left to right that opens the drawer (if any)
-Future<void> swipeOpenDrawer(WidgetTester tester) async => await tester.dragFrom(
-      tester.getTopLeft(find.byType(MaterialApp)),
-      const Offset(300, 0),
-    );

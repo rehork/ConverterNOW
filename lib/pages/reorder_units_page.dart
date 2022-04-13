@@ -102,6 +102,7 @@ class ChoosePropertyPage extends StatelessWidget {
                             Padding(
                               padding: const EdgeInsets.symmetric(horizontal: 50),
                               child: ListTile(
+                                key: ValueKey('chooseProperty-${reversePageNumberListMap[index]}'),
                                 title: Center(
                                   child: Text(
                                     orderedDrawerList[index],
@@ -188,6 +189,7 @@ class ChoosePropertyPage extends StatelessWidget {
               child: ListView.builder(
                 itemBuilder: (BuildContext context, int index) {
                   return ListTile(
+                    key: ValueKey('chooseProperty-${reversePageNumberListMap[index]}'),
                     title: Center(
                       child: Text(
                         orderedDrawerList[index],

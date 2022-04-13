@@ -1,5 +1,7 @@
 // ignore_for_file: constant_identifier_names
 import 'dart:convert';
+import 'dart:io';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:quick_actions/quick_actions.dart';
@@ -264,6 +266,12 @@ void initializeQuickAction(
     {required void Function(String index) onActionSelection,
     required List<int> conversionsOrderDrawer,
     required List<PropertyUi> propertyUiList}) {
+  
+  // Continue ONLY if we are on android
+  if(kIsWeb || !Platform.isAndroid){
+    return;
+  }
+  
   final int index1 = conversionsOrderDrawer.indexWhere((val) => val == 1);
   final int index2 = conversionsOrderDrawer.indexWhere((val) => val == 2);
   final int index3 = conversionsOrderDrawer.indexWhere((val) => val == 3);
