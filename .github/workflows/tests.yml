@@ -53,6 +53,9 @@ jobs:
     - name: Enable linux build
       run: flutter config --enable-linux-desktop
 
+    - name: Flutter clean
+      run: flutter clean
+
     - name: Flutter doctor
       run: flutter doctor --verbose
 
