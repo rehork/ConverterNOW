@@ -52,7 +52,9 @@ jobs:
 
     - name: Enable linux build
       run: flutter config --enable-linux-desktop
-      run: flutter doctor
+
+    - name: Flutter doctor
+      run: flutter doctor --verbose
 
     - name: Run integration testing
       run: |
