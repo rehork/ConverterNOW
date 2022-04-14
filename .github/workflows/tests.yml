@@ -15,7 +15,6 @@ jobs:
       uses: subosito/flutter-action@v2.3.0
       with:
         cache: true
-        channel: master
 
     - name: Flutter version
       run: flutter --version
@@ -50,6 +49,7 @@ jobs:
       uses: subosito/flutter-action@v2.3.0
       with:
         cache: true
+        channel: master
 
     - name: Enable linux build
       run: flutter config --enable-linux-desktop
