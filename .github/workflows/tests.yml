@@ -27,7 +27,7 @@ jobs:
 
   desktop_integration_testing:
     name: Desktop integration testing
-    runs-on: winodws-latest
+    runs-on: windows-latest
     needs: unit_testing
     timeout-minutes: 30
     steps:
