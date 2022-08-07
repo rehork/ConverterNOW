@@ -17,8 +17,6 @@ dependencies:
   url_launcher: ^6.1.2
   #Needed to improve the state management
   provider: ^6.0.2
-  #Needed for translation
-  intl: ^0.17.0
   #Needed for fonts
   google_fonts: ^2.3.1
   #Needed for navigation between pages
@@ -30,14 +28,17 @@ dependencies:
   #Needed for updating exchange rates
   exchange_rates:
     path: packages/exchange_rates
+  #Needed for translations
+  l10n:
+    path: packages/l10n
   #Needed for unit conversion
   units_converter: ^2.0.1
     #git:
     #  url: https://github.com/ferraridamiano/units_converter
     #path: ../units_converter
 
-  flutter_localizations:
-      sdk: flutter
+  #flutter_localizations:
+  #    sdk: flutter
 
 dev_dependencies:
   test: ^1.17.12
